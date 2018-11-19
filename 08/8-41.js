@@ -51,8 +51,8 @@ app.get('/user/:id', function (request, response) {
 });
 
 app.post('/user', function (request, response) {
-  var name = request.body.name;
-  var region = request.body.region;
+  var name = request.param('name');
+  var region = request.param('region');
 
   if (name && region) {
     response.send(DummyDB.insert({
@@ -66,8 +66,8 @@ app.post('/user', function (request, response) {
 
 app.put('/user/:id', function (request, response) {
   var id = request.params.id;
-  var name = request.body.name;
-  var region = request.body.region;
+  var name = request.param('name');
+  var region = request.param('region');  
 
   var item = DummyDB.get(id);
   item.name = name || item.name;

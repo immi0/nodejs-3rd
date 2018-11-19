@@ -51,8 +51,9 @@ app.get('/user/:id', function (request, response) {
 });
 
 app.post('/user', function (request, response) {
-  var name = request.body.name;
-  var region = request.body.region;
+/* ------------ Error -----------------
+  var name = request.body('name');
+  var region = request.body('region');
 
   if (name && region) {
     response.send(DummyDB.insert({
@@ -60,6 +61,19 @@ app.post('/user', function (request, response) {
       region: region
     }));
   } else {
+    throw new Error('error');
+  }
+--------------------------------------*/
+  var name = request.param('name');
+  var region = request.param('region');
+  
+  if(name && region) {
+    response.send(DummyDB.insert({
+      name: name,
+      region: region
+    }));
+  } 
+  else {
     throw new Error('error');
   }
 });

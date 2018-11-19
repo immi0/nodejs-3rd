@@ -11,7 +11,7 @@ var DummyDB = (function () {
     if (id) {
       id = (typeof id == 'string') ? Number(id) : id;
       for (var i in storage) if (storage[i].id == id) {
-        return storage[i];
+         return storage[i];
       }
     } else {
       return storage;
@@ -51,6 +51,7 @@ app.get('/user/:id', function (request, response) {
 });
 
 app.post('/user', function (request, response) {
+/*
   var name = request.body.name;
   var region = request.body.region;
 
@@ -62,12 +63,28 @@ app.post('/user', function (request, response) {
   } else {
     throw new Error('error');
   }
+*/
+  var name = request.param('name');
+  var region = request.param('region');
+  
+  if(name && region) {
+    response.send(DummyDB.insert({
+      name: name,
+      region: region
+    }));
+  } 
+  else {
+    throw new Error('error');
+  }
+
 });
 
 app.put('/user/:id', function (request, response) {
   var id = request.params.id;
-  var name = request.body.name;
-  var region = request.body.region;
+  //var name = request.body.name;
+  //var region = request.body.region;
+  var name = request.param('name');
+  var region = request.param('region');
 
   var item = DummyDB.get(id);
   item.name = name || item.name;
