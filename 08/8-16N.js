@@ -16,6 +16,7 @@ app.get('/b', function (request, response) {
   response.send('<a href="/a">Go to A</a>');
 })
 
+//http.createServer(app).listen(52273, function () {
 app.listen(52273, function () {
   console.log('Server running at http://127.0.0.1:52273');
 });
